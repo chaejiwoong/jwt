@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="redis.mapper.RefreshMapper"> <!-- 고유한 도메인 -->
+
+    <cache />
+
+    <insert id="save" parameterType="redis.domain.RefreshToken">
+        insert into refresh (key, token)
+        values (#{key}, #{token})
+    </insert>
+
+    <select id="findByKey" resultType="redis.domain.RefreshToken">
+        select * from refresh where key = #{key}
+    </select>
+
+<!--    <select id="existsByEmail" resultType="boolean">-->
+<!--        select * from member where email = #{email}-->
+<!--    </select>-->
+
+<!--    <select id="findById" resultType="redis.domain.Member">-->
+<!--        select * from member where id = #{id}-->
+<!--    </select>-->
+    <update id="updateToken" parameterType="redis.domain.RefreshToken">
+        update refresh set token = #{token} where key = #{key}
+    </update>
+</mapper>
+
